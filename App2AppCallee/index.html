@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=1920"/>
+    <title>Tizen App to App Callee</title>
+    <script src="./main.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<h1>Tizen App to App Callee</h1>
+
+<div class="left">
+    <fieldset>
+        <legend>Logs: </legend>
+        <div class="logs" id="logs"></div>
+    </fieldset>
+</div>
+<div class="right">
+    <h2>Info</h2>
+
+    <p>This application can be called using Tizen Caller or directly from SmartHub.</p>
+
+    <p>
+        When application is being called with launch params, those params will be shown
+        in the console on the left.
+    </p>
+
+    <p>
+        When application is being moved to background or brought back from it,
+        it will communicate this. When brought back from background, application will reshow
+        the launch params.
+    </p>
+
+    <p>
+        Showing/hiding application will not clear the logs. Only new app instance will clear the logs.
+    </p>
+</div>
+</body>
+</html>

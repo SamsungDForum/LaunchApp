@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://yourdomain/App2AppCallee" version="1.0.0" viewmodes="maximized">
+    <tizen:application id="demoapp003.App2AppCallee" package="demoapp003" required_version="2.3"/>
+    <content src="index.html"/>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <icon src="icon.png"/>
+    <name>App2AppCallee</name>
+    <tizen:profile name="tv"/>
+    <tizen:setting background-support="enable"/>
+</widget>
