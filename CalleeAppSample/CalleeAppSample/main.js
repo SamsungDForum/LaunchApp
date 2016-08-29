@@ -10,7 +10,7 @@
 
         if (msg) {
             // Update logs
-            console.log('[App2AppCallee]: ', msg);
+            console.log('[CalleeAppSample]: ', msg);
             logsEl.innerHTML += msg + '<br />';
         } else {
             // Clear logs
@@ -26,9 +26,6 @@
     function registerKeyHandler() {
         document.addEventListener('keydown', function (e) {
             switch (e.keyCode) {
-                case 10182 : // Exit Key
-                    tizen.application.getCurrentApplication().exit();
-                    break;
                 case 10009 : // Return Key
                     tizen.application.getCurrentApplication().hide();
                     break;
@@ -58,14 +55,14 @@
 
         if (appControl && appControl.operation === 'http://tizen.org/appcontrol/operation/default') {
             data = appControl.data;
-            log('Data from App2AppCaller successfully received:' + JSON.stringify(data));
+            log('Data from CallerAppSample successfully received:' + JSON.stringify(data));
             log('Data sent from application with ID: ' + reqAppControl.callerAppId);
 
             // Parse and display data received from TizenCaller
             data.forEach(function (dataItem) {
-                if (dataItem.key === 'App2AppCaller') {
+                if (dataItem.key === 'CallerAppSample') {
                     dataItem.value.forEach(function (value) {
-                        log('App2AppCaller sent: ' + value);
+                        log('CallerAppSample sent: ' + value);
                     });
                 }
             });
@@ -79,7 +76,7 @@
 
             reqAppControl.replyResult([appControlData]);
         } else {
-            log('No data received from App2AppCaller.');
+            log('No data received from CallerAppSample.');
         }
     };
 

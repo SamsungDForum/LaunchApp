@@ -38,12 +38,7 @@
     <h3>Main workflow</h3>
 
     <p>This application (Tizen App to App Caller) will launch different app (Tizen App to App Callee). Depending on the action chosen by
-        user, application can communicate between themselves or not. When entering Tizen App to App Callee, Tizen App to App Callee
-        application will be moved to background. It will be running, because of the following setting attribute in
-        config.xml file:</p>
-    <code>background-support="enable"</code>
-
-    <p>This means that Tizen App to App Callee will be able to listen to any data incomming from Tizen App to App Callee.</p>
+        user, application can communicate between themselves or not.</p>
 
     <p>While in Tizen App to App Callee application, press:</p>
     <ul>
@@ -55,7 +50,7 @@
 
     <p>
         Press 1 to launch Tizen App to App Callee app. In this scenario there will be no communication between apps. Tizen App to App Caller
-        will simply launch the Tizen App to App Callee. Without sending any data. Tizen App to App Callee will not send back any data.</p>
+        will simply launch the Tizen App to App Callee without sending any data. Tizen App to App Callee will not send back any data.</p>
     <p>
         If Tizen App to App Callee was already running before, it will be brought back from background instead of creating a
         new instance.
@@ -64,9 +59,8 @@
     <h3>With communication</h3>
 
     <p>Press 2 to launch Tizen App to App Callee with arguments. Arguments will be sent directly to Tizen App to App Callee. Arguments will be
-        <code>['apples', 'bananas']</code>. As soon, as Tizen App to App Callee receives the arguments, it will send back an message. The message
-        will be handled by the <code>replyHandler</code> object. If received successful message, it will print it. It
-        should be something like <code>Thank you for the fruits!</code>.
+        <code>['apples', 'bananas']</code>.
+        As soon, as Tizen App to App Callee receives the arguments, it will send back an message. The message will be handled by the <code>replyHandler</code> object. If received successful message, it will print it. It should be something like <code>Thank you for the fruits!</code>.
     </p>
     <p>
         If Tizen App to App Callee was already running in background, it will be killed. A new instance of application will be

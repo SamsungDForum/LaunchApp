@@ -11,7 +11,7 @@
 
         if (msg) {
             // Update logs
-            console.log('[App2AppCaller]: ', msg, obj);
+            console.log('[CallerAppSample]: ', msg, obj);
             msg = obj ? msg += ' [see console]' : msg;
             logsEl.innerHTML = logsEl.innerHTML + msg + '<br>';
         } else if (msg === null) {
@@ -48,8 +48,8 @@
      * launched.
      */
     function onLaunchSuccess() {
-        log('App2AppCallee has been successfully launched.');
-        console.log('App2AppCallee started with args');
+        log('CalleeAppSample has been successfully launched.');
+        console.log('CalleeAppSample started with args');
         console.log(arguments);
     }
 
@@ -69,14 +69,14 @@
     var replyHandler = {
         //function to be called when data from Callee application is received successfully
         onsuccess: function (data) {
-            log('App2AppCallee sent back data: ', data);
+            log('CalleeAppSample sent back data: ', data);
 
             // Display data returned from TizenCallee.
             data.forEach(function (dataItem) {
                 log(dataItem);
-                if (dataItem.key === 'App2AppCallee') {
+                if (dataItem.key === 'CalleeAppSample') {
                     dataItem.value.forEach(function (value) {
-                        log('App2AppCallee sent back: ' + value);
+                        log('CalleeAppSample sent back: ' + value);
                     });
                 }
             });
@@ -84,7 +84,7 @@
 
         //function to be called when there is an error in communication with Callee application
         onfailure: function () {
-            log('App2AppCallee failed to send data back.');
+            log('CalleeAppSample failed to send data back.');
         }
     };
 
@@ -103,18 +103,18 @@
                     break;
                 // Key 1: Launch TizenCallee without any data
                 case 49:
-                    log('Launching App2AppCallee without any data.');
+                    log('Launching CalleeAppSample without any data.');
                     // This is the simplest application launch
                     // No arguments can be passed to it nor received from it
                     // If application is already running in the background, it will be brought back
-                    tizen.application.launch('demoapp003.App2AppCallee', onLaunchSuccess, onLaunchError);
+                    tizen.application.launch('iw98RgTdbA.CalleeAppSample', onLaunchSuccess, onLaunchError);
                     break;
                 // Key 2: Launch TizenCallee and send data
                 case 50:
                     // The first param is a key and the second parameter is a value.
                     // Second parameter must be in the form of an array.
                     data = new tizen.ApplicationControlData(
-                        'App2AppCaller',
+                        'CallerAppSample',
                         ['apples', 'bananas']
                     );
 
@@ -126,7 +126,7 @@
                         [data] //data to sent to another application
                     );
 
-                    log('Launching App2AppCallee and sending data:', appControl);
+                    log('Launching CalleeAppSample and sending data:', appControl);
 
                     // Here we send ApplicationControl instance with the data to
                     // the other application. TizenCallee will attempt to get this
@@ -135,7 +135,7 @@
                     // There is no possibility to pass launch params to app already running.
                     tizen.application.launchAppControl(
                         appControl,
-                       'demoapp003.App2AppCallee',
+                       'iw98RgTdbA.CalleeAppSample',
                         onLaunchSuccess,
                         onLaunchError,
                         replyHandler
