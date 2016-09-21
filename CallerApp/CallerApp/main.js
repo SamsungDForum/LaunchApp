@@ -107,7 +107,7 @@
                     // This is the simplest application launch
                     // No arguments can be passed to it nor received from it
                     // If application is already running in the background, it will be brought back
-                    tizen.application.launch('iw98RgTdbA.CalleeAppSample', onLaunchSuccess, onLaunchError);
+                    tizen.application.launch('0S0Be5ZtMX.CalleeApp', onLaunchSuccess, onLaunchError);
                     break;
                 // Key 2: Launch TizenCallee and send data
                 case 50:
@@ -135,7 +135,7 @@
                     // There is no possibility to pass launch params to app already running.
                     tizen.application.launchAppControl(
                         appControl,
-                       'iw98RgTdbA.CalleeAppSample',
+                       '0S0Be5ZtMX.CalleeApp',
                         onLaunchSuccess,
                         onLaunchError,
                         replyHandler
