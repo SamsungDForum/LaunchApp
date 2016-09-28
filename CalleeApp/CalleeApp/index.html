@@ -1,42 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=1920"/>
-    <title>Tizen App to App Callee</title>
-    <script src="./main.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <title></title>
+    <script type='text/javascript' src='./main.js'></script>
 </head>
+<body bgcolor='#ccffcc' onload='main();' onkeydown='handleKeydown(event);'>
+	<h1>Callee Application</h1>
+	<h2>Please click buttons.</h2>
+	<br>
 
-<body>
-<h1>Tizen App to App Callee</h1>
+	<table border='1' cellpadding='10px'>
+		<tr align='center'>
+			<td>Function</td>
+			<td>Play action</td>
+		</tr>
+		<tr>
+			<td>tizen.application.getCurrentApplication().hide</td>
+			<td><input type='button' onclick='test1();' value='Click'> / Number 1</td>
+		</tr>
+		<tr>
+			<td>tizen.application.getCurrentApplication().exit</td>
+			<td><input type='button' onclick='test2();' value='Click'> / Number 2</td>
+		</tr>
+		<tr>
+			<td>tizen.application.getCurrentApplication().getRequestedAppControl</td>
+			<td><input type='button' onclick='test3();' value='Click'> / Number 3</td>
+		</tr>
+		<tr>
+			<td align='center'>Log Clear</td>
+			<td><input type='button' onclick='logClear()' value='Click'> / Number 0</td>
+		</tr>
+	</table>
 
-<div class="left">
-    <fieldset>
-        <legend>Logs: </legend>
-        <div class="logs" id="logs"></div>
-    </fieldset>
-</div>
-<div class="right">
-    <h2>Info</h2>
-
-    <p>This application can be called using Tizen Caller or directly from SmartHub.</p>
-
-    <p>
-        When application is being called with launch params, those params will be shown
-        in the console on the left.
-    </p>
-
-    <p>
-        When application is being moved to background or brought back from it,
-        it will communicate this. When brought back from background, application will reshow
-        the launch params.
-    </p>
-
-    <p>
-        Showing/hiding application will not clear the logs. Only new app instance will clear the logs.
-    </p>
-</div>
+	<br>
+	<h2>Result</h2>
+	<h3 id='result'></h3>
 </body>
 </html>

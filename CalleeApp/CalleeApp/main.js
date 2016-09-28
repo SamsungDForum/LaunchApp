@@ -1,113 +1,95 @@
-(function () {
-    'use strict';
+function handleKeydown(event) {
+	console.log('[TestApp] handleKeydown : ' + event.keyCode);
 
-    /**
-     * Displays logging information on the screen and in the console.
-     * @param {string} msg - Message to log.
-     */
-    function log(msg) {
-        var logsEl = document.getElementById('logs');
+	switch(event.keyCode) {
+		case 48:
+			logClear();
 
-        if (msg) {
-            // Update logs
-            console.log('[CalleeAppSample]: ', msg);
-            logsEl.innerHTML += msg + '<br />';
-        } else {
-            // Clear logs
-            logsEl.innerHTML = '';
-        }
+		break;
+		case 49:
+			test1();
 
-        logsEl.scrollTop = logsEl.scrollHeight;
-    }
+		break;
+		case 50:
+			test2();
 
-    /**
-     * Handle input from remote
-     */
-    function registerKeyHandler() {
-        document.addEventListener('keydown', function (e) {
-            switch (e.keyCode) {
-                case 10009 : // Return Key
-                    tizen.application.getCurrentApplication().hide();
-                    break;
-            }
-        });
-    }
+		break;
+		case 51:
+			test3();
 
-    /**
-     * Display application version
-     */
-    function displayVersion() {
-        var el = document.createElement('div');
-        el.id = 'version';
-        el.innerHTML = 'ver: ' + tizen.application.getAppInfo().version;
-        document.body.appendChild(el);
-    }
+		break;
+		case 10009:
+			console.log('[TestApp] return');
+			tizen.application.getCurrentApplication().exit();
+			
+		break;
+		default:
 
-    /**
-     * This function checks if application is called from another application with parameters
-     */
-    function checkParameters () {
-        // Get the ApplicationControl instance sent from TizenCaller. This object
-        // contains data sent from the caller application.
-        var reqAppControl = tizen.application.getCurrentApplication().getRequestedAppControl();
-        var appControl = reqAppControl.appControl;
-        var data;
+		break;
+	}
+}
 
-        if (appControl && appControl.operation === 'http://tizen.org/appcontrol/operation/default') {
-            data = appControl.data;
-            log('Data from CallerAppSample successfully received:' + JSON.stringify(data));
-            log('Data sent from application with ID: ' + reqAppControl.callerAppId);
+var result = '';
+var text = '';
 
-            // Parse and display data received from TizenCaller
-            data.forEach(function (dataItem) {
-                if (dataItem.key === 'CallerAppSample') {
-                    dataItem.value.forEach(function (value) {
-                        log('CallerAppSample sent: ' + value);
-                    });
-                }
-            });
+function test1() {
+	tizen.application.getCurrentApplication().hide();
+}
 
-            // Send a reply to TizenCaller. As of 09.12.2014 .replyResult can only
-            // be called once.
-            var appControlData = new tizen.ApplicationControlData(
-                'fromTizenCallee',
-                ['Thank you for the fruits!']
-            );
+function test2() {
+	tizen.application.getCurrentApplication().exit();
+}
 
-            reqAppControl.replyResult([appControlData]);
-        } else {
-            log('No data received from CallerAppSample.');
-        }
-    };
+function test3() {
+	deepLink();
+}
 
+function main() {
+	console.log('[TestApp] onload');
 
-    // When application is sent to background or summonned from backgrount the 'visibilitychange' event
-    // is emitted.
-    // By testing the value of document.hidden we can discover whether the application is being sent to
-    // background or it is summoned back.
-    document.addEventListener('visibilitychange', function () {
-        log('New visibility (document.visibilityState):' + document.visibilityState);
-        if (!document.hidden) {
-            // Application is brought back from background
-            // Reshow the initial application launch params
-            checkParameters();
-        }
-    }, false);
+	window.addEventListener('appcontrol', deepLink);
+	deepLink();
+	
+	document.addEventListener(
+		'visibilitychange',
+		function() {
+			if(document.hidden){
+				text = 'hidden';
+				log(text);
+				
+			} else {
+				text = 'visible';
+				log(text);
+			}
+		}
+	);
 
+	tizen.tvinputdevice.registerKey('0');
+	tizen.tvinputdevice.registerKey('1');
+	tizen.tvinputdevice.registerKey('2');
+	tizen.tvinputdevice.registerKey('3');
+}
 
-    window.onload = function () {
-        if (window.tizen === undefined) {
-            log('This application needs to be run on Tizen device');
-            return;
-        }
+function deepLink() {
+	var reqAppCtrl = tizen.application.getCurrentApplication().getRequestedAppControl();
+	log("tizen.application.getCurrentApplication().getRequestedAppControl().callerAppId : " + reqAppCtrl.callerAppId);
 
-        displayVersion();
-        registerKeyHandler();
-        checkParameters();
+	var reqAppCtrlDataAry = reqAppCtrl.appControl.data;
+	log("tizen.application.getCurrentApplication().getRequestedAppControl().appControl.data : " + JSON.stringify(reqAppCtrlDataAry));
 
-    };
+	var appData = new tizen.ApplicationControlData(
+		'Success',
+		['Jump TizenWebApplication Success']
+	);
+	reqAppCtrl.replyResult([appData]);
+}
 
+function log(string) {
+	result = result + '<br>' + string;
+	document.getElementById('result').innerHTML = result;
+}
 
-
-
-}());
+function logClear() {
+	result = '';
+	document.getElementById('result').innerHTML = '';
+}
