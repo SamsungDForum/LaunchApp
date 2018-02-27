@@ -81,7 +81,12 @@ function deepLink() {
 		'Success',
 		['Jump TizenWebApplication Success']
 	);
-	reqAppCtrl.replyResult([appData]);
+	try {
+		reqAppCtrl.replyResult([appData]);
+	}
+	catch(e) {
+		console.log('Failed replay to caller',e);
+	}	
 }
 
 function log(string) {
